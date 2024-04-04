@@ -18,11 +18,9 @@ namespace InventoryMaintenance
 
         private void FillItemListBox()
         {
-            IDisplayable item;
             lstItems.Items.Clear();
-            for (int i = 0; i < items.Count; i++)
+            foreach(InventoryItem item in items)
             {
-                item = items[i];
                 lstItems.Items.Add(item.GetDisplayText());
             }
         }

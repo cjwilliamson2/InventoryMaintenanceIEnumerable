@@ -1,6 +1,8 @@
-﻿namespace InventoryMaintenance
+﻿using System.Collections;
+
+namespace InventoryMaintenance
 {
-    public class InventoryItemList
+    public class InventoryItemList : IEnumerable<InventoryItem>
     {
         private List<InventoryItem> items;
 
@@ -70,5 +72,18 @@
         public void Fill() => items = InventoryDB.GetItems();
 
         public void Save() => InventoryDB.SaveItems(items);
+
+        public IEnumerator<InventoryItem> GetEnumerator()
+        {
+            foreach(InventoryItem item in items)
+            {
+                yield return item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
